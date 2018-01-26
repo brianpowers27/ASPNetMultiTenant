@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <title>@ViewBag.Title</title>
+    <link href="/Content/CSSC/site-cssc-relative.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    @*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>*@
+    <script src="/Content/JavaScript/jquery-1.10.1.min.js"></script>
+    <script src="/Content/JavaScript/jquery-migrate-1.2.1.min.js"></script>
+
+</head>
+
+
+
+<body class="cssc-page">
+
+    <div class="layoutWrapper">
+
+        <header class="pageHeader">
+
+            <a href="/#" class="siteLogo">Code Stars Summit<span class="ir"></span></a>
+            <span class="eventDate">OCTOBER 2ND 2015 <br>San Jose, Ca</span>
+            <ul class="socialMedia">
+                <li><a class="fb" target="" href="http://www.facebook.com/group.php?gid=6125701762">FaceBook</a></li>
+                <li><a class="tw" target='_new' href="http://twitter.com/sv_code_camp">Twitter</a></li>
+                <li><a class="yt" target='_new' href="http://www.youtube.com/results?search_query=silicon+valley+code+camp&sm=3">YouTube</a></li>
+                <li><a class="gplus" target='_new' href="https://plus.google.com/110656351842726857531?prsrc=3">Google+</a></li>
+                <li><a class="in" target='_new' href="http://www.linkedin.com/groups?gid=976557&amp;trk=myg_ugrp_ovr">LinkedIn</a></li>
+            </ul>
+
+            <div class="menuUserBar">
+                @{ Html.RenderPartial("_TopMenu"); }
+            </div>
+
+        </header>
+
+        @RenderBody()
+
+
+    </div>
+
+    <footer id="footer" class="mainFooter hideOnSmallScreen">
+        <div class="footerWrap">
+            <div class="creditsWrap">
+                <p>Code Stars Summit and Silicon Valley Code Camp (tm) are trademarks of 73rd Street Associates (Copyright © 2015)</p>
+                <p>Site Built with ASP.NET, WebAPI2, ExtJS, AngularJS and more by <a href="http://peterkellner.net" target="_blank">PeterKellner.net</a></p>
+            </div>
+            <div class="linksWrap">
+                <ul>
+
+
+
+                    <li><a href="mailTo:service2015@codestarssummit.com">CONTACT</a></li>
+
+
+
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Content/JavaScript/bxslider/jquery.bxslider.min.js"></script>
+    <script src="/Content/JavaScript/validate/jquery.validate.min.js"></script>
+    <script src="/Content/JavaScript/validate/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Content/JavaScript/tappize/tappize.min.js"></script>
+    <script src="/Content/JavaScript/main-cssc.js"></script>
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,34 @@
+﻿@model List<WebApp.Models.Speaker>
+@{
+    Layout = null;
+}
+
+@*<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Speakers At AngularU</title>
+</head>*@
+<body>
+    <div>
+        @foreach (var speaker in @Model)
+        {
+            <span>
+            @speaker.FirstName @speaker.LastName
+            </span>
+            <br/>
+            <span>
+                Speaker:
+                @speaker.FirstName
+                &nbsp;
+                @speaker.LastName<br />
+            </span>
+            foreach (var session in speaker.Sessions)
+            {
+                <span>&nbsp;&nbsp;@session.Title&nbsp;</span>
+                <br/>
+            }
+        }
+    </div>
+@*</body>
+</html>*@

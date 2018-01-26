@@ -1,0 +1,50 @@
+﻿
+@model WebApp.Models.Session
+
+@{
+    ViewBag.Title = "Session Detail";
+    Layout = "~/Views/SVCC/Shared/_Layout.cshtml";
+}
+
+<h1 class="title">Session Details</h1>
+
+
+
+<h2 class="session-subh">Presentation</h2>
+<h2 class="sessionTitle hTitle ProfessionalSession ">
+    @Model.Title
+</h2>
+
+<div class="sessionDescription">
+    <p>@Html.Raw(@Model.Description)</p>
+</div>
+
+<h2 class="session-subh">The Speakers</h2>
+<div class="sessionSpeakers">
+    <div class="listingWrap">
+        @foreach (var speaker in @Model.Speakers)
+        {
+            <section class="listingBox speakerDetails">
+                <div class="listingMedia">
+                    <img alt="img" width="135" height="135" src="@speaker.ImageUrl" />
+                </div>
+                <div class="listingInfo">
+                    <header class="listingHeader">
+                        <h3>
+                            <a href="/Speaker/Detail/@speaker.SpeakerUrl">@speaker.FirstName @speaker.LastName</a>
+                        </h3>
+                    </header>
+
+                    <div class="listingDesc">
+                        @Html.Raw(speaker.Bio)
+                    </div>
+                </div>
+            </section>
+        }
+    </div>
+    <!-- / listingWrap -->
+</div>
+
+
+
+<!-- / sessionWrap -->

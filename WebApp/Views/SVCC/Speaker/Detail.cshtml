@@ -1,0 +1,88 @@
+﻿
+@model WebApp.Models.Speaker
+
+
+@{
+    ViewBag.Title = "Speaker Detail";
+    Layout = "~/Views/SVCC/Shared/_Layout.cshtml";
+}
+
+
+
+<h1 class="title">Speaker Detail</h1>
+<div id="en_speakerlist" class="listingWrap">
+
+    <section class="listingBox speakerDetails">
+        <div class="listingMedia">
+            <img width="135" height="135"
+                 src="@Model.ImageUrl" alt="@Model.FirstName @Model.LastName" />
+        </div>
+        <div class="listingInfo">
+            <header class="listingHeader">
+                <h2>@Model.FirstName @Model.LastName</h2>
+                @{
+                    if (!String.IsNullOrEmpty(@Model.WebSite))
+                    {
+                        string userWebsite = @Model.WebSite.ToLower();
+                        <span></span>
+                        if (!string.IsNullOrEmpty(userWebsite))
+                        {
+                            if (!userWebsite.StartsWith("http", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                userWebsite = "http://" + @Model.WebSite;
+                            }
+                            else
+                            {
+                                userWebsite = @Model.WebSite;
+                            }
+                        }
+                        <h3>
+                            <a href="@userWebsite" target="_blank">@Model.WebSite</a>
+                        </h3>
+                    }
+                }
+            </header>
+
+            @if (string.IsNullOrEmpty(@Model.Bio))
+            {
+                <div class="listingDesc"></div>
+            }
+            else
+            {
+                if (@Model.Bio.Length > 300)
+                {
+                    <div class="listingDesc">
+                        <p>@Html.SafeEncode(@Model.Bio, @Model.AllowHtml)</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="listingDesc">
+                        <p>@Html.SafeEncode(@Model.Bio, @Model.AllowHtml)</p>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+
+
+    <h2 class="smainTitle">Sessions</h2>
+    @foreach (var session in Model.Sessions.OrderBy(a => a.Title.ToUpper()))
+    {
+        <section class="sessionBox">
+            <h2 id="session_@session.Id" class="hTitle">
+                <a href="/Session/Detail/@session.SessionUrl">@Html.Raw(session.Title)</a>
+            </h2>
+
+            <div class="sessionDetailsWrap">
+                <div class="sessionDescription" id="sessionDescription_@session.Id">
+                    <p>@Html.Raw(session.Description)</p>
+                </div>
+                <a class="button gray alt pointer loadLocal" href="/Session/Detail/@(session.SessionUrl)" target="_blank">Details</a>
+            </div>
+        </section>
+    }
+
+
+</div>
+

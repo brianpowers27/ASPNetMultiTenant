@@ -1,0 +1,149 @@
+﻿@using WebApp.Models
+@model List<WebApp.Models.Session>
+
+@{
+    ViewBag.Title = "Code Stars Summit";
+    Layout = "~/Views/CSSC/Shared/_Layout.cshtml";
+}
+
+<div class="presentersLoading">The page is loading&hellip;</div>
+
+
+
+<div id="home-page">
+
+    <section class="stripe">
+        <div class="content">
+            <h2>About Code Stars Summit</h2>
+            <p>
+                Code Stars Summit is built on top of Silicon Valley Code Camp,
+                the premier free conference of sessions in the world now going on its 11th year.
+                Code Stars Summit, unlike Code Camp are all day attendee paid workshops led primarily by top instructors
+                from code camp and others of equal stature. Expect after coming to this event to not just have an idea about the new technology taught,
+                but to leave the dedicated instruction with the right applicable knowledge to build applications.
+            </p>
+        </div>
+        <aside class="side">
+            <div class="sideImageBox">
+                <a href="http://www.siliconvalley-codecamp.com/"><img src='/Content/CSSC/Images/svcc-promo-mobile.jpg' class="responsive" alt="SVCC"></a>
+            </div>
+        </aside>
+    </section>
+
+
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <section class="presenters">
+
+
+            <div class="ribbon">
+                <div class="inner">
+                    <h2>
+                        Star <strong>Presenters</strong>
+                    </h2>
+                    <form class="presentersSearch">
+                        <input type="text" name="presenterName" placeholder="Search" />
+                        <input type="image" src='/Content/CSSC/Images/btn_search.png' value="Search" />
+                    </form>
+                </div>
+            </div>
+
+
+            @{
+                var sessions = new List<Session>();
+                if (Model != null && Model.Count > 0)
+                {
+                    sessions =
+                        Model.OrderBy(a => Guid.NewGuid()).ToList();
+                }
+            }
+
+            <div class="presentersList">
+                <ul class="presentersCarousel">
+                    @foreach (var session in sessions)
+                    {
+
+                       
+                            List<Speaker> workshopLeaders = session.Speakers.ToList();
+                            <li class="presenter">
+                                <div class="namesWrapper">
+                                    <ul class="names">
+                                        @foreach (var speaker in workshopLeaders)
+                                        {
+                                            <li>
+
+                                                <img alt="img" src="@speaker.ImageUrl" />
+                                                <h3>@speaker.FirstName @speaker.LastName</h3>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="description">
+                                    <h3>@session.Title</h3>
+                                    @(Html.Raw(session.DescriptionShort))
+                                </div>
+                                <div class="more">
+                                    <a href="/Session/Detail/@(session.SessionUrl)">Read more</a>
+                                </div>
+                            </li>
+                        
+                    }
+                </ul>
+                <div class="unusedSlides"></div>
+            </div>
+
+
+        </section>
+                }
+
+    <section class="stripe">
+        <div class="content">
+            <h3 class="main">What are the workshop topics?</h3>
+            <p>
+                Topics are selected based on what people are most attracted to at Silicon Valley Code Camp.
+                Expect that most workshops will be lead by top Silicon Valley Code Camp speakers.
+                Each of the workshops (either one or more days long) will be of limited size (typically 25 to 45 students per track).
+            </p>
+
+
+
+
+
+
+            <h3>How much will it cost me to attend?</h3>
+            <p>
+                Expect to pay less than what you would pay at a professional training company. Our focus here is to provide top quality,
+                focussed education from top Code Stars.
+            </p>
+
+            <h3>Where is the current Code Stars Summit Being Held?</h3>
+            <p>
+
+                <strong>Evergreen Valley College</strong> <br>
+                3095 Yerba Buena Rd<br>
+                San Jose, Ca 95135<br>
+                <br>
+
+
+            </p>
+
+        </div>
+        <aside class="side">
+            <div class="sidePhotoPromo">
+
+                <img src="/Content/CSSC/Images/CrockfordTeaching2013.jpg" width="308">
+                <p>
+                    “The Best From Silicon Valley<br>Code Camp”
+                </p>
+                <p>
+                    <strong>Douglas Crockford</strong>, seen here<br>teaching JavaScript Patterns
+                </p>
+            </div>
+            <!-- <a class="cta" href="#"><img src="/Images/btn_agenda-mobile.png" class="responsive" alt="See the agenda"/></a> -->
+        </aside>
+    </section>
+
+
+
+</div>

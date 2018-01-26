@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1030, user-scalable=1" />
+    <title>@ViewBag.Title</title>
+    <link href="/Content/SVCC/style/site.css" rel="stylesheet" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header id="header" class="mainHeader">
+            <div class="logoInfoBar">
+                <div class="logoWrap">
+                    <a href="/">
+                        @{
+                            var urlsvcc =
+                                "/Content/SVCC/Images/silicon-valley-code-camp.png";
+                            var urlAlt =
+                                "Silicon Valley Code Camp";
+
+                        }
+                        <img src="@urlsvcc" alt="@urlAlt" />
+                    </a>
+                </div>
+                <div class="dateWrap">
+
+                    October 3-4   2015
+                </div>
+
+                <div class="venueWrap">
+                    <span class="name">Evergreen Valley College</span><br />
+                    3095 Yerba Buena Rd<br />
+                    San Jose, California   95135
+                </div>
+
+
+
+            </div>
+            <div class="menuUserBar">
+                @{ Html.RenderPartial("_TopMenu"); }
+            </div>
+        </header>
+        <!-- #header-->
+
+        <section id="middle">
+
+
+            <div id="container">
+                <div id="content" class="content">
+                    @RenderBody()
+                </div>
+            </div>
+        </section>
+        <!-- #middle -->
+
+
+    </div>
+    <!-- #wrapper -->
+
+
+
+</body>
+</html>

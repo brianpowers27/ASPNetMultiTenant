@@ -1,0 +1,67 @@
+﻿@model WebApp.Models.Session
+
+@{
+    ViewBag.Title = "Session Detail";
+    Layout = "~/Views/CSSC/Shared/_Layout.cshtml";
+}
+
+<section class="pageContent">
+
+    <h2 class="purpleRibbon">Workshop Detail</h2>
+    <section class="workshopInfo">
+        <h2>
+            @{
+                var session = Model;
+            }
+            @Html.Raw(session.Title)
+        </h2>
+
+
+        <section class="presentationBox">
+
+            @Html.Raw(session.DescriptionShort)
+            <div class="collapsible">
+                @Html.Raw(session.Description)
+            </div>
+
+        </section>
+
+    </section>
+
+    <section class="workshopLeader">
+        <h2>Leaders</h2>
+        <div class="inner">
+
+            @*Added By Peter Kellner To Loop Through Multiple Workshop Speakers 1/10/2014 *@
+
+            @{
+                var workshopLeaders = session.Speakers.ToList();
+            }
+
+            @foreach (var t in workshopLeaders)
+            {
+                <div class="leader">
+                    <div class="leftColumn">
+                        <img alt="img" width="177" height="177" src="@t.ImageUrl" />
+                        <p class="leaderName">@t.FirstName @t.LastName</p>
+
+                        <p class="leaderURL">
+                            <a href="@t.WebSite">@t.WebSite</a>
+                        </p>
+                    </div>
+
+                    <div class="rightColumn">
+                        <h3>@Html.Raw(t.FirstName ?? "") @Html.Raw(t.LastName ?? "")</h3>
+                        <div>@Html.Raw(t.Bio ?? "")</div>
+                        @* <ul class="buttonList">
+                              <li><a href="#" class="btn download">Download the speaker slides and material</a></li>
+                              <li><a href="#" class="btn">Learn More</a></li>
+                            </ul>*@
+                    </div>
+                </div>
+            }
+
+        </div>
+    </section>
+
+</section>

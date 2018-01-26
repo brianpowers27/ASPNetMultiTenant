@@ -1,0 +1,113 @@
+﻿
+@model List<WebApp.Models.Speaker>
+@{
+    ViewBag.Title = "Speakers";
+    Layout = "~/Views/SVCC/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="title">Presenters</h1>
+
+
+<div class="searchBox">
+    <div class="searchBoxField">
+        <label for="speakerFilter">Search :</label>
+        <div class="searchInput">
+            <input id="speakerFilter" name="txtsearch" type="text" />
+            <button id="btnsearch" type="button"></button>
+        </div>
+    </div>
+</div>
+<!-- / searchBox -->
+
+@if (Model.Any())
+{
+    <div id="en_speakerlist" class="listingWrap">
+        @foreach (var speaker in Model.OrderBy(a => a.LastName.ToUpper()).ThenBy(a => a.FirstName.ToUpper()))
+        {
+            <section class="listingBox speakerDetails">
+                <div class="listingMedia">
+                    <img width="135" height="135"
+                         src="@speaker.ImageUrl" alt="@speaker.FirstName @speaker.LastName" />
+                </div>
+                <div class="listingInfo">
+                    <header class="listingHeader">
+                        <h2><a href="/Speaker/Detail/@(speaker.SpeakerUrl)">@speaker.FirstName @speaker.LastName</a></h2>
+                        @{
+                            // all this code should go in the controller, not the view -Peter
+                            string userWebsite = speaker.WebSite.ToLower();
+                            if (!string.IsNullOrEmpty(userWebsite))
+                            {
+                                if (!userWebsite.StartsWith("http", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    userWebsite = "http://" + speaker.WebSite;
+                                }
+                                else
+                                {
+                                    userWebsite = speaker.WebSite;
+                                }
+
+
+                            }
+                        }
+                        <h3>
+                            <a href="@(userWebsite)" target="_blank">@(userWebsite)</a>
+                        </h3>
+                    </header>
+
+                    @if (string.IsNullOrEmpty(speaker.Bio))
+                    {
+                        <div class="listingDesc"></div>
+                    }
+                    else
+                    {
+                        if (speaker.Bio.Length > 300)
+                        {
+                            <div class="listingDesc">
+                                <p>@Html.SafeEncode(speaker.Bio, speaker.AllowHtml)</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="listingDesc">
+                                <p>@Html.SafeEncode(speaker.Bio, speaker.AllowHtml)</p>
+                            </div>
+                        }
+                    }
+                </div>
+
+            </section>
+                            }
+    </div>
+    <!-- / listingWrap -->
+                            }
+                            else
+                            {
+                                <p>No data found</p>
+                            }
+
+<script type="text/javascript">
+    $(function () {
+        $("#speakerFilter").keyup(function () {
+            var input = $(this).val(), resultsCount = 0;
+            search(input, resultsCount);
+        });
+        $("#btnsearch").click(function () {
+            var input = $("#speakerFilter").val(), resultsCount = 0;
+            search(input, resultsCount);
+        });
+
+        function search(input, resultsCount) {
+            $("#en_speakerlist").children().each(function () {
+                var s = $(this);
+                if (s.find("h2").text().search(new RegExp(input, "i")) < 0) {
+                    s.hide();
+                } else {
+                    s.show();
+                    resultsCount++;
+                }
+            });
+            $("#speakerSearchResultsCount").text(resultsCount).show();
+        }
+    });
+</script>

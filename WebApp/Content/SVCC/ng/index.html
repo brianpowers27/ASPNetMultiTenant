@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="MTApp">
+<head>
+    <base href="/">   <!--required for html5mode-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>MultiTenantApp</title>
+
+    <!--<link rel="stylesheet" href="/Content/ANGU/styles/sosa-font-local.css" />-->
+    <!--<link href="/Content/ANGU/styles/main.css"  rel="stylesheet" />-->
+
+    <link rel="stylesheet" href="Content/styles/main.css" />
+
+
+    <script src="app.js"></script>
+    <script src="templates.js"></script>
+
+
+
+
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<!--<nav class="navbar navbar-inverse" role="navigation">-->
+    <!--<div class="navbar-header">-->
+        <!--<a class="navbar-brand" ui-sref="#">AngularUI Router</a>-->
+    <!--</div>-->
+    <!--<ul class="nav navbar-nav">-->
+        <!--<li><a ui-sref="home">Home</a></li>-->
+        <!--<li><a ui-sref="speaker">Speakers</a></li>-->
+        <!--<li><a ui-sref="author">Pluralsight Authors Speaking</a></li>-->
+    <!--</ul>-->
+<!--</nav>-->
+
+<!-- MAIN CONTENT -->
+<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+
+<div class="container">
+    <div ui-view></div>
+</div>
+
+</body>
+</html>

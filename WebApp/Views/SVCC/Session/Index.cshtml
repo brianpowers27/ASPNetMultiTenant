@@ -1,0 +1,67 @@
+﻿
+@model List<WebApp.Models.Session>
+@{
+    ViewBag.Title = "Session (SVCC)";
+    Layout = "~/Views/SVCC/Shared/_Layout.cshtml";
+}
+
+@*<h2>Session (@Model)</h2>
+    <span>/Views/SVCC/Session/index.cshtml</span>*@
+
+<div class="top-info-content">
+    <h3 class="title">Sessions</h3>
+    <br /><br />
+</div>
+<section class="presenters kidsSessions">
+    <div class="presentersList">
+        <ul class="presentersCarousel">
+
+            @foreach (var session in @Model.OrderBy(a => a.Title.ToUpper()))
+            {
+                var sessionSpeakers = session.Speakers.ToList();
+
+                var speakerCnt = sessionSpeakers.Count;
+                string countClass;
+                if (speakerCnt == 1)
+                {
+                    countClass = "SpeakerCount1";
+                }
+                else if (speakerCnt == 2)
+                {
+                    countClass = "SpeakerCount2";
+                }
+                else
+                {
+                    countClass = "SpeakerCount3";
+                }
+
+                <li class="presenter @countClass">
+                    <div class="namesWrapper">
+                        <ul class="names">
+                            @foreach (var speaker in sessionSpeakers)
+                            {
+                                <li>
+                                    <div class="photo">
+                                        <a href="/Speaker/Detail/@speaker.SpeakerUrl"><img alt="img" src="@(speaker.ImageUrl)" /></a>
+                                    </div>
+                                    
+                                    <h3>@speaker.FirstName @speaker.LastName</h3>
+                                    
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="description">
+                        <h3 style="font-weight: bold; font-size: larger;">@session.Title</h3>
+                        Html.Raw(@session.DescriptionShort)
+                    </div>
+                    <div class="morecodestars">
+                        <a href="/Session/Detail/@session.SessionUrl" target="_blank">Read more</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+
